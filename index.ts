@@ -26,3 +26,41 @@ class ScaleUtil {
         return Math.min(1 / n, ScaleUtil.maxScale(scale, i, n)) * n 
     }
 }
+
+class DrawingUtil {
+
+    static drawCircle(context : CanvasRenderingContext2D, x : number, y : number, r : number) {
+        context.beginPath()
+        context.arc(x, y, r, 0, 2 * Math.PI)
+        context.fill()
+    }
+
+    static drawTruckCreate(context : CanvasRenderingContext2D, scale : number) {
+        const size : number = Math.min(w, h) / sizeFactor 
+        const r : number = Math.min(w, h) / rFactor 
+
+        const sc1 : number = ScaleUtil.divideScale(scale, 0, parts)
+        const sc2 : number = ScaleUtil.divideScale(scale, 1, parts)
+        const sc3 : number = ScaleUtil.divideScale(scale, 2, parts)
+        const sc4 : number = ScaleUtil.divideScale(scale, 3, parts) 
+        context.save()
+        context.translate(w / 2 + (w / 2 + size) * sc4, h / 2)
+        context.rotate(deg * sc3)
+        for (var j = 0; j < 2; j++) {
+            context.save()
+            context.scale(1 - 2 * j, 1)
+            DrawingUtil.drawCircle(context, -size / 3, -h / 2 - r + (h / 2 + r -size / 2) * sc2, r)
+            context.restore()
+        }
+        context.fillRect((-size / 2) * sc1, -size / 2, size * sc1, size)
+        context.restore()
+    }
+
+    static drawTCNode(context : CanvasRenderingContext2D, i : number, scale : number) {
+        context.lineCap = 'round'
+        context.lineWidth = Math.min(w, h) / strokeFactor 
+        context.strokeStyle = colors[i]
+        context.fillStyle = colors[i]
+        DrawingUtil.drawTruckCreate(context, scale)
+    }
+}
