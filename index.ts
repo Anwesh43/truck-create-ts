@@ -4,7 +4,7 @@ const strokeFactor : number = 90
 const parts : number = 4 
 const scGap : number = 0.02 / parts 
 const delay : number = 20 
-const sizeFactor : number = 6.9 
+const sizeFactor : number = 4.9 
 const rFactor : number = 22.9 
 const deg : number = Math.PI 
 const backColor : string = "#bdbdbd"
@@ -49,7 +49,7 @@ class DrawingUtil {
         for (var j = 0; j < 2; j++) {
             context.save()
             context.scale(1 - 2 * j, 1)
-            DrawingUtil.drawCircle(context, -size / 3, -h / 2 - r + (h / 2 + r -size / 2) * sc2, r)
+            DrawingUtil.drawCircle(context, -size / 4, -h / 2 - r + (h / 2 -size / 2) * sc2, r)
             context.restore()
         }
         context.fillRect((-size / 2) * sc1, -size / 2, size * sc1, size)
