@@ -2,7 +2,7 @@ const w : number = window.innerWidth
 const h : number = window.innerHeight 
 const strokeFactor : number = 90 
 const parts : number = 4 
-const scGap : number = 0.02 / parts 
+const scGap : number = 0.03 / parts 
 const delay : number = 20 
 const sizeFactor : number = 4.9 
 const rFactor : number = 22.9 
@@ -53,6 +53,7 @@ class DrawingUtil {
             context.restore()
         }
         context.fillRect((-size / 2) * sc1, -size / 2, size * sc1, size)
+        context.fillRect(-size / 2 + (-size / 3) * sc2, -size / 2, (size / 3) * sc2, size / 3)
         context.restore()
     }
 
