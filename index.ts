@@ -204,3 +204,25 @@ class TruckCreate {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    tc : TruckCreate = new TruckCreate()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.tc.draw(context)    
+    }
+
+    handleTap(cb : Function) {
+        this.tc.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.tc.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
